@@ -1,8 +1,9 @@
-import 'package:biz_link/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utility/colors.dart';
+import '../products/manage_products.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -45,11 +46,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: buildTopSection(),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18.0, vertical: 10.0),
                 child: buildCountersRow(),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18.0, vertical: 10.0),
                 child: buildSettingAndAddonsVerticalMenu(),
               ),
             ],
@@ -68,13 +71,13 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage('assets/images/avatar.jpg'),
+            backgroundImage: const AssetImage('assets/images/avatar.jpg'),
             backgroundColor: MyColor.amber,
           ),
           // CircleImage(
           //     imageUrl:
           //         'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80'),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Column(
@@ -99,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             width: 70,
             height: 26,
@@ -109,9 +112,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
                     side: BorderSide(color: MyColor.white)),
-                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
               ),
-              child: Text(
+              child: const Text(
                 'Log out',
                 style: TextStyle(
                     color: Colors.white,
@@ -148,8 +152,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildCountersRowItem(String counter, String title) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
-      padding: EdgeInsets.symmetric(vertical: 14),
+      margin: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.symmetric(vertical: 14),
       width: 100.w / 3.5,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
@@ -166,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: MyColor.dark_font_grey,
                 fontWeight: FontWeight.w600),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
@@ -183,8 +187,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildSettingAndAddonsVerticalMenu() {
     return Container(
-      margin: EdgeInsets.only(bottom: 120, top: 14),
-      padding: EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+      margin: const EdgeInsets.only(bottom: 120, top: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6.00),
         color: Colors.white,
@@ -193,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
             color: Colors.black.withOpacity(.08),
             blurRadius: 20,
             spreadRadius: 0.0,
-            offset: Offset(0.0, 10.0), // shadow direction: bottom right
+            offset: const Offset(0.0, 10.0), // shadow direction: bottom right
           )
         ],
       ),
@@ -216,11 +220,46 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 16,
                     color: MyColor.dark_font_grey,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   Text(
                     'Edit Profile',
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(color: MyColor.dark_font_grey, fontSize: 12),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Divider(
+            thickness: 1,
+            color: MyColor.light_grey,
+          ),
+          Container(
+            height: 40,
+            child: TextButton(
+              onPressed: () {
+                Get.to(() => const ManageProducts());
+              },
+              style: TextButton.styleFrom(
+                  splashFactory: NoSplash.splashFactory,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.zero),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_business_outlined,
+                    color: MyColor.dark_font_grey,
+                    size: 22,
+                  ),
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  Text(
+                    'Manage Products',
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(color: MyColor.dark_font_grey, fontSize: 12),
@@ -250,7 +289,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 16,
                     color: MyColor.dark_font_grey,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   Text(
@@ -284,7 +323,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 16,
                     color: MyColor.dark_font_grey,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   Text(
@@ -318,7 +357,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 16,
                     color: MyColor.dark_font_grey,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   Text(

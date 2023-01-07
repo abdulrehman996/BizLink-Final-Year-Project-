@@ -13,7 +13,15 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  List<Role> _roleList = [
+    Role(id: 1, picture: 'assets/icons/distributor.png', name: 'Distributor'),
+    Role(id: 2, picture: 'assets/icons/factory.png', name: 'Factory'),
+    Role(id: 3, picture: 'assets/icons/wholesaler.png', name: 'Wholesaler'),
+    Role(id: 4, picture: 'assets/icons/retailer.png', name: 'Retailer'),
+  ];
+
   bool _isAgree = false;
+  int _selectedRole = -1;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -21,6 +29,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
       TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +59,10 @@ class _SignupPageState extends State<SignupPage> {
                             width: 72,
                             height: 72,
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.blueGrey[900],
                                 borderRadius: BorderRadius.circular(8)),
                             child:
-                                Image.asset('assets/images/biz_link_logo.jpeg'),
+                                Image.asset('assets/images/bizlinkT.png'),
                           ),
                         ],
                       ),
@@ -166,6 +175,33 @@ class _SignupPageState extends State<SignupPage> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 4.0),
                               child: Text(
+                                'Address',
+                                style: TextStyle(
+                                    color: MyColor.accent_color,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    height: 36,
+                                    child: TextField(
+                                      controller: _addressController,
+                                      autofocus: false,
+                                      decoration: InputDecorations
+                                          .buildInputDecoration_1(
+                                              hintText: "Address"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Text(
                                 "Password",
                                 style: TextStyle(
                                     color: MyColor.accent_color,
@@ -220,6 +256,60 @@ class _SignupPageState extends State<SignupPage> {
                                               hintText: "• • • • • • • •"),
                                     ),
                                   ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Text(
+                                "Select Role",
+                                style: TextStyle(
+                                    color: MyColor.accent_color,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  for (int i = 0; i < _roleList.length; i++)
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () {
+                                          _selectedRole = i;
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.all(4),
+                                          padding: EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: _selectedRole == i
+                                                    ? MyColor.accent_color
+                                                    : Colors.grey.shade400,
+                                                width: 4),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Image.asset(_roleList[i].picture,
+                                                  height: 40),
+                                              FittedBox(
+                                                fit: BoxFit.fill,
+                                                child: Text(_roleList[i].name),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                 ],
                               ),
                             ),
@@ -355,4 +445,12 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   }
+}
+
+class Role {
+  final int id;
+  final String picture;
+  final String name;
+
+  Role({required this.id, required this.picture, required this.name});
 }

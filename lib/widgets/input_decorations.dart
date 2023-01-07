@@ -10,17 +10,13 @@ class InputDecorations {
         fillColor: MyColor.white,
         hintStyle: TextStyle(fontSize: 12.0, color: MyColor.text_field_grey),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: MyColor.noColor,
-              width: 0.2),
+          borderSide: BorderSide(color: MyColor.noColor, width: 0.2),
           borderRadius: const BorderRadius.all(
             Radius.circular(6.0),
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: MyColor.accent_color,
-              width: 0.5),
+          borderSide: BorderSide(color: MyColor.accent_color, width: 0.5),
           borderRadius: const BorderRadius.all(
             Radius.circular(6.0),
           ),

@@ -47,8 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: BoxDecoration(
                                 color: Colors.blueGrey[900],
                                 borderRadius: BorderRadius.circular(10)),
-                            child:
-                                Image.asset('assets/images/bizlinkT.png'),
+                            child: Image.asset('assets/images/bizlinkT.png'),
                           ),
                         ],
                       ),
@@ -174,8 +173,8 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                          return const MaineScreen();
-                                        }));
+                                      return const MaineScreen();
+                                    }));
                                   },
                                 ),
                               ),

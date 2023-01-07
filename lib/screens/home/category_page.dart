@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../models/products.dart';
 import '../../utility/colors.dart';
-import '../../widgets/sellers_card.dart';
+import '../../widgets/input_decorations.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({Key? key}) : super(key: key);
@@ -12,52 +12,146 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
-  List<dynamic> _shopList = [];
+  List<Products> _foundProducts = [];
+  List<Products> _allProducts = [];
+
+  final TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    _foundProducts = topProductsList;
+    _allProducts = topProductsList;
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seller Shops'),
+        automaticallyImplyLeading: false,
+        title: const Text('Search Products'),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
-        child: Column(
-          children: [
-            SizedBox(
-                height: MediaQuery.of(context).viewPadding.top > 40 ? 180 : 135
-                //MediaQuery.of(context).viewPadding.top is the statusbar height, with a notch phone it results almost 50, without a notch it shows 24.0.For safety we have checked if its greater than thirty
-                ),
-            GridView.builder(
-              // 2
-              //addAutomaticKeepAlives: true,
-              itemCount: _shopList.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                  childAspectRatio: 0.7),
-              padding:
-                  EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                // 3
-                return GestureDetector(
-                  onTap: () {},
-                  child: SellersShopCard(
-                    id: _shopList[index].id,
-                    image: _shopList[index].logo,
-                    name: _shopList[index].name,
-                    stars: double.parse(_shopList[index].rating.toString()),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: SizedBox(
+                  height: 56,
+                  child: TextField(
+                    controller: _textEditingController,
+                    autofocus: false,
+                    onChanged: (value) {
+                      _runFilter(value);
+                    },
+                    decoration: InputDecorations.buildInputDecoration_1(
+                        hintText: "Search"),
                   ),
-                );
-              },
-            )
-          ],
+                ),
+              ),
+              buildRecommendations(),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Widget buildRecommendations() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Recommended Products',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: _foundProducts.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.80,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+          itemBuilder: (context, i) {
+            return Container(
+              color: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Image.asset(
+                    _foundProducts[i].image,
+                    fit: BoxFit.fill,
+                    height: 120,
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _foundProducts[i].name,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '★${_foundProducts[i].stars}',
+                            style:
+                                TextStyle(color: MyColor.golden, fontSize: 16),
+                          ),
+                          Text(
+                            'Rs. ${_foundProducts[i].price}',
+                            style: const TextStyle(
+                                color: Colors.red, fontSize: 16),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<Products> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = _allProducts;
+    } else {
+      results = _allProducts
+          .where((user) => user.name
+              .toString()
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _foundProducts = results;
+    });
   }
 }

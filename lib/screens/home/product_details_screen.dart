@@ -15,9 +15,9 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: Text("Product Detail"),
+        title: const Text("Product Detail"),
         backgroundColor: MyColor.accent_color,
       ),
       body: SingleChildScrollView(
