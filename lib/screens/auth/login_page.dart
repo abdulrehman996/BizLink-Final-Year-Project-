@@ -10,11 +10,11 @@ import 'package:sizer/sizer.dart';
 import '../../utility/colors.dart';
 import '../../utility/custom_validators.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
+import '../../widgets/input_decorations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
   static const String routeName = '/login-screen';
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -23,14 +23,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    key:
-    _scaffoldKey; // Add this line
-
     return Scaffold(
       body: Stack(
         children: [
@@ -188,14 +184,8 @@ class _LoginPageState extends State<LoginPage> {
                                               _isLoading = true;
                                             });
                                             final User? user =
-                                                //     await AuthMethods()
-                                                //         .loginWithEmailAndPassword(
-                                                //   _emailController.text,
-                                                //   _passwordController.text,
-                                                //
-                                                // );
                                                 await AuthMethods()
-                                                    .loginWithEmailAndPasswords(
+                                                    .loginWithEmailAndPassword(
                                               _emailController.text,
                                               _passwordController.text,
                                             );
@@ -203,12 +193,6 @@ class _LoginPageState extends State<LoginPage> {
                                               setState(() {
                                                 _isLoading = false;
                                               });
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                content: Text(
-                                                    'Your account is blocked.'),
-                                              ));
-                                              return;
                                               return;
                                             }
                                             Navigator.pushReplacement(context,

@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             CircleAvatar(
               // backgroundImage: AssetImage('assets/images/avatar.jpg'),
-              backgroundImage: AssetImage('assets/images/avatar.jpg'),
+              backgroundImage: NetworkImage(me.imageURL ?? ''),
               backgroundColor: MyColor.amber,
             ),
             // CircleImage(

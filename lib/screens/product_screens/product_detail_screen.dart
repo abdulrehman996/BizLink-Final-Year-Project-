@@ -3,21 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/auth_methods.dart';
-import '../../enums/role.dart';
 import '../../functions/time_date_function.dart';
 import '../../functions/unique_id_functions.dart';
 import '../../models/app_user.dart';
 import '../../models/chat/chat.dart';
 import '../../models/product/product.dart';
-import '../../providers/cart_provider.dart';
-import '../../providers/product_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../utility/utilities.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
-import '../../widgets/custom_widgets/rating_widget.dart';
 import '../../widgets/custom_widgets/title_and_detail_widget.dart';
-import '../../widgets/product/grid_view_of_prod.dart';
 import '../../widgets/product/prod_urls_slider.dart';
 import '../chat/personal_chat_page/product_chat_screen.dart';
 
@@ -26,11 +21,8 @@ class ProductDetailScreen extends StatelessWidget {
       : super(key: key);
   final Product product;
 
-
   @override
-
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Consumer<UserProvider>(
@@ -164,7 +156,6 @@ class _ProductAdditionalInfo extends StatelessWidget {
                 title: 'Price',
                 subtitle: product.price.toString(),
               ),
-              RatingWidget(),
             ],
           ),
           const SizedBox(height: 6),
@@ -177,6 +168,7 @@ class _ProductAdditionalInfo extends StatelessWidget {
     );
   }
 }
+
 class _ButtonSection extends StatelessWidget {
   const _ButtonSection({required this.product, Key? key}) : super(key: key);
   final Product product;
@@ -186,15 +178,6 @@ class _ButtonSection extends StatelessWidget {
       TextStyle(color: Colors.white, fontSize: 16);
   @override
   Widget build(BuildContext context) {
-    print(AuthMethods.uid);
-    final Role myRole =
-        Provider
-            .of<UserProvider>(context)
-            .user(uid: AuthMethods.uid)
-            .role;
-    final List<Product> products =
-    Provider.of<ProductProvider>(context).products(myRole.json);
-
     return product.uid == AuthMethods.uid
         ? const SizedBox()
         : Padding(
@@ -210,26 +193,11 @@ class _ButtonSection extends StatelessWidget {
                         textStyle: _textStyle,
                         title: 'Add To Cart',
                         onTap: () {
-                          Provider.of<CartProvider>(context, listen: false)
-                              .addtocart(product, 1);
-
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Product Added to Cart'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-
+                          if (AuthMethods.getCurrentUser == null) {
+                            Navigator.of(context)
+                                .pushNamed(LoginPage.routeName);
+                            return;
+                          }
                           // Navigator.of(context)
                           //     .push(MaterialPageRoute<ProductChatScreen>(
                           //   builder: (BuildContext context) => BuyNowScreen(
@@ -279,8 +247,6 @@ class _ButtonSection extends StatelessWidget {
                     ));
                   },
                 ),
-                GridViewOfProducts(posts: products),
-
               ],
             ),
           );
