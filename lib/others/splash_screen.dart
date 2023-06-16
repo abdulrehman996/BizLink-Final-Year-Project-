@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   getState() {
     Future.delayed(const Duration(milliseconds: 3000), () {
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) =>
