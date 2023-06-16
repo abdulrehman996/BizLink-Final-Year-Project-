@@ -1,28 +1,24 @@
 class ProdSubCategory {
   ProdSubCategory({
-    required this.subCatID,
+    required this.catID,
     required this.title,
-    this.status = true,
   });
 
-  final String subCatID;
+  final String catID;
   final String title;
-  final bool status;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'sub_cat_id': subCatID,
+      'sub_cat_id': catID,
       'title': title,
-      'status': status,
     };
   }
 
   // ignore: sort_constructors_first
   factory ProdSubCategory.fromMap(Map<String, dynamic> map) {
     return ProdSubCategory(
-      subCatID: map['sub_cat_id']?.toString().trim() ?? '',
-      title: map['title']?.toString().trim() ?? '',
-      status: map['status'] ?? true,
+      catID: map['sub_cat_id'] ?? '',
+      title: map['title'] ?? '',
     );
   }
 }

@@ -45,7 +45,7 @@ class GridViewOfProducts extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
               boxShadow: <BoxShadow>[
                 BoxShadow(
@@ -75,34 +75,30 @@ class GridViewOfProducts extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
                             '${posts[index].title}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 18),
                           ),
-                          Text(
-                            posts[index].price.toStringAsFixed(2),
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(width: 10),
+                      ],
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      splashRadius: 12,
-                      icon: const Icon(Icons.shopping_cart_checkout_outlined),
+                    Text(
+                      posts[index].price.toStringAsFixed(2),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ],
                 ),

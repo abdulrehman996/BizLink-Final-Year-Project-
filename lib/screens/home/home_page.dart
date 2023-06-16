@@ -23,10 +23,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     print(AuthMethods.uid);
-    final Role myRole =
-        Provider.of<UserProvider>(context).user(uid: AuthMethods.uid).role;
-    final List<Product> products =
-        Provider.of<ProductProvider>(context).products(myRole.json);
+    final List<Product> products = Provider.of<ProductProvider>(context)
+        .products(RoleConvertor()
+            .buyFrom(Provider.of<UserProvider>(context)
+                .user(uid: AuthMethods.uid)
+                .role)
+            .json);
+    print(products.length);
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
