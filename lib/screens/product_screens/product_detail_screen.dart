@@ -67,7 +67,6 @@ class ProductDetailScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

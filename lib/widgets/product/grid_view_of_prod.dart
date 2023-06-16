@@ -1,6 +1,4 @@
-import 'package:biz_link/database/auth_methods.dart';
 import 'package:biz_link/providers/cart_provider.dart';
-import 'package:biz_link/screens/product_screens/edit_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/product/product.dart';
@@ -47,7 +45,6 @@ class GridViewOfProducts extends StatelessWidget {
           },
           child: Container(
             width: double.infinity,
-            height: double.infinity,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.grey[200],
@@ -104,15 +101,6 @@ class GridViewOfProducts extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (posts[index].uid == AuthMethods.uid)
-                      GestureDetector(
-                        onTap: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              EditProductScreen(product: posts[index]),
-                        )),
-                        child: Icon(Icons.edit),
-                      ),
                     IconButton(
                       onPressed: () =>
                           Provider.of<CartProvider>(context, listen: false)

@@ -24,7 +24,6 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(title: Text('Search')),
       body: Consumer<ProductProvider>(builder: (context, prodPro, _) {
         return SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
