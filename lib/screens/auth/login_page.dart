@@ -1,8 +1,5 @@
-import 'package:biz_link/database/auth_methods.dart';
 import 'package:biz_link/screens/auth/signup_page.dart';
 import 'package:biz_link/screens/home/main_screen.dart';
-import 'package:biz_link/widgets/custom_widgets/password_textformfield.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -21,7 +18,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -89,139 +85,141 @@ class _LoginPageState extends State<LoginPage> {
                             )
                           ],
                         ),
-                        child: Form(
-                          key: _key,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 4.0),
-                                child: Text(
-                                  'Email',
-                                  style: TextStyle(
-                                      color: MyColor.accent_color,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Text(
+                                'Email',
+                                style: TextStyle(
+                                    color: MyColor.accent_color,
+                                    fontWeight: FontWeight.w600),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    CustomTextFormField(
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    height: 36,
+                                    child: CustomTextFormField(
                                       controller: _emailController,
                                       hint: 'test@test.com',
                                       keyboardType: TextInputType.emailAddress,
                                       validator: (String? value) =>
                                           CustomValidator.email(value),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 4.0),
-                                child: Text(
-                                  "Password",
-                                  style: TextStyle(
-                                      color: MyColor.accent_color,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    PasswordTextFormField(
-                                        controller: _passwordController),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 30.0),
-                                child: Container(
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: MyColor.text_field_grey,
-                                          width: 1),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(12.0))),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: MyColor.accent_color,
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(6.0))),
-                                      fixedSize: Size.fromWidth(
-                                          MediaQuery.of(context).size.width),
-                                    ),
-                                    child: const Text(
-                                      'Login',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    onPressed: () async {
-                                      if (!_key.currentState!.validate()) {
-                                        return;
-                                      }
-                                      final User? user = await AuthMethods()
-                                          .loginWithEmailAndPassword(
-                                        _emailController.text,
-                                        _passwordController.text,
-                                      );
-                                      if (user == null) return;
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return const MaineScreen();
-                                      }));
-                                    },
                                   ),
-                                ),
+                                ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 15.0, bottom: 15),
-                                child: Center(
-                                    child: Text(
-                                  'or, create a new account',
-                                  style: TextStyle(
-                                      color: MyColor.font_grey, fontSize: 12),
-                                )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Text(
+                                "Password",
+                                style: TextStyle(
+                                    color: MyColor.accent_color,
+                                    fontWeight: FontWeight.w600),
                               ),
-                              SizedBox(
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    height: 36,
+                                    child: TextField(
+                                      controller: _passwordController,
+                                      autofocus: false,
+                                      obscureText: true,
+                                      enableSuggestions: false,
+                                      autocorrect: false,
+                                      decoration: InputDecorations
+                                          .buildInputDecoration_1(
+                                              hintText: "• • • • • • • •"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30.0),
+                              child: Container(
                                 height: 45,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: MyColor.text_field_grey,
+                                        width: 1),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(12.0))),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     elevation: 0,
-                                    fixedSize: Size.fromWidth(
-                                        MediaQuery.of(context).size.width),
-                                    primary: MyColor.amber,
+                                    primary: MyColor.accent_color,
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(6.0))),
+                                    fixedSize: Size.fromWidth(
+                                        MediaQuery.of(context).size.width),
                                   ),
-                                  child: Text(
-                                    'Sign up',
+                                  child: const Text(
+                                    'Login',
                                     style: TextStyle(
-                                        color: MyColor.accent_color,
+                                        color: Colors.white,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600),
                                   ),
                                   onPressed: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return const SignupPage();
+                                      return const MaineScreen();
                                     }));
                                   },
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 15.0, bottom: 15),
+                              child: Center(
+                                  child: Text(
+                                'or, create a new account',
+                                style: TextStyle(
+                                    color: MyColor.font_grey, fontSize: 12),
+                              )),
+                            ),
+                            SizedBox(
+                              height: 45,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  fixedSize: Size.fromWidth(
+                                      MediaQuery.of(context).size.width),
+                                  primary: MyColor.amber,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(6.0))),
+                                ),
+                                child: Text(
+                                  'Sign up',
+                                  style: TextStyle(
+                                      color: MyColor.accent_color,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const SignupPage();
+                                  }));
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
