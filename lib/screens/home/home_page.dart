@@ -1,7 +1,6 @@
 import 'package:biz_link/models/product/product.dart';
 import 'package:biz_link/providers/product_provider.dart';
 import 'package:biz_link/screens/auth/login_page.dart';
-import 'package:biz_link/screens/chat/personal_chat_page/personal_chat_dashboard.dart';
 import 'package:biz_link/screens/product_screens/add_product_screen.dart';
 import 'package:biz_link/widgets/product/grid_view_of_prod.dart';
 import 'package:biz_link/widgets/product/product_tile.dart';
@@ -29,9 +28,10 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             onPressed: () async {
               await AuthMethods().signOut();
-              Navigator.of(context).pushNamed(PersonalChatDashboard.routeName);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  LoginPage.routeName, (route) => false);
             },
-            icon: Icon(Icons.chat),
+            icon: Icon(Icons.logout),
           ),
         ],
       ),
