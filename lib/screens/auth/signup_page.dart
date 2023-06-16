@@ -1,7 +1,4 @@
 import 'package:biz_link/screens/auth/login_page.dart';
-import 'package:biz_link/utility/custom_validators.dart';
-import 'package:biz_link/widgets/custom_widgets/custom_textformfield.dart';
-import 'package:biz_link/widgets/custom_widgets/password_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -96,7 +93,7 @@ class _SignupPageState extends State<SignupPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              padding: const EdgeInsets.only(bottom: 4.0),
                               child: Text(
                                 'First Name',
                                 style: TextStyle(
@@ -104,14 +101,21 @@ class _SignupPageState extends State<SignupPage> {
                                     fontWeight: FontWeight.w600),
                               ),
                             ),
-                            CustomTextFormField(
-                              controller: _firstNameController,
-                              hint: 'First Name',
-                              validator: (value) =>
-                                  CustomValidator.lessThen3(value),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: SizedBox(
+                                height: 36,
+                                child: TextField(
+                                  controller: _firstNameController,
+                                  autofocus: false,
+                                  decoration:
+                                      InputDecorations.buildInputDecoration_1(
+                                          hintText: "Maryam"),
+                                ),
+                              ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              padding: const EdgeInsets.only(bottom: 4.0),
                               child: Text(
                                 'Last Name',
                                 style: TextStyle(
@@ -119,14 +123,21 @@ class _SignupPageState extends State<SignupPage> {
                                     fontWeight: FontWeight.w600),
                               ),
                             ),
-                            CustomTextFormField(
-                              controller: _lastNameController,
-                              hint: 'Last Name',
-                              validator: (value) =>
-                                  CustomValidator.lessThen3(value),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: SizedBox(
+                                height: 36,
+                                child: TextField(
+                                  controller: _lastNameController,
+                                  autofocus: false,
+                                  decoration:
+                                      InputDecorations.buildInputDecoration_1(
+                                          hintText: "Khalid"),
+                                ),
+                              ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              padding: const EdgeInsets.only(bottom: 4.0),
                               child: Text(
                                 'Email',
                                 style: TextStyle(
@@ -134,38 +145,83 @@ class _SignupPageState extends State<SignupPage> {
                                     fontWeight: FontWeight.w600),
                               ),
                             ),
-                            CustomTextFormField(
-                              controller: _emailController,
-                              hint: 'test@test.com',
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (String? value) =>
-                                  CustomValidator.email(value),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    height: 36,
+                                    child: TextField(
+                                      controller: _emailController,
+                                      autofocus: false,
+                                      decoration: InputDecorations
+                                          .buildInputDecoration_1(
+                                              hintText: "maryam@example.com"),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              padding: const EdgeInsets.only(bottom: 4.0),
                               child: Text(
-                                'Password',
+                                "Password",
                                 style: TextStyle(
                                     color: MyColor.accent_color,
                                     fontWeight: FontWeight.w600),
                               ),
                             ),
-                            PasswordTextFormField(
-                              controller: _passwordConfirmController,
-                              hint: ' . . . . . . .',
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    height: 36,
+                                    child: TextField(
+                                      controller: _passwordController,
+                                      autofocus: false,
+                                      obscureText: true,
+                                      enableSuggestions: false,
+                                      autocorrect: false,
+                                      decoration: InputDecorations
+                                          .buildInputDecoration_1(
+                                              hintText: "• • • • • • • •"),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              padding: const EdgeInsets.only(bottom: 4.0),
                               child: Text(
-                                'Confirm Password',
+                                "Confirm Password",
                                 style: TextStyle(
                                     color: MyColor.accent_color,
                                     fontWeight: FontWeight.w600),
                               ),
                             ),
-                            PasswordTextFormField(
-                              controller: _passwordConfirmController,
-                              hint: ' . . . . . . .',
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    height: 36,
+                                    child: TextField(
+                                      controller: _passwordConfirmController,
+                                      autofocus: false,
+                                      obscureText: true,
+                                      enableSuggestions: false,
+                                      autocorrect: false,
+                                      decoration: InputDecorations
+                                          .buildInputDecoration_1(
+                                              hintText: "• • • • • • • •"),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 20.0),
