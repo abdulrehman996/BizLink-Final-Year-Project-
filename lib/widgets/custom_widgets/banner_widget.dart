@@ -1,4 +1,3 @@
-import 'package:biz_link/widgets/custom_widgets/show_loading.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +14,8 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   final List _bannerImage = [];
 
-  getBanner() async{
-    return await _firestore
+  getBanner() {
+    return _firestore
         .collection('banners')
         .get()
         .then((QuerySnapshot querySnapshot) {
@@ -38,7 +37,7 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _bannerImage.isEmpty? ShowLoading():Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
