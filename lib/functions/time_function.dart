@@ -1,8 +1,6 @@
 import 'package:intl/intl.dart';
 
-class TimeDateFunctions {
-  static int get timestamp => DateTime.now().microsecondsSinceEpoch;
-
+class TimeFunction {
   static String timeInDigits(int timestamp) {
     DateFormat format = DateFormat('HH:mm a');
     DateTime date = DateTime.fromMicrosecondsSinceEpoch(timestamp);
