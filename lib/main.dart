@@ -14,7 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import 'others/splash_screen.dart';
-import 'providers/cart_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,9 +31,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => ProdCatProvider()),
-        ChangeNotifierProvider<CartProvider>(
-        create: (BuildContext context) => CartProvider(),
-      ),
       ],
       child: Sizer(builder: (
         BuildContext context,

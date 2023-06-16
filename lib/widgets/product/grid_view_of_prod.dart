@@ -1,6 +1,4 @@
-import 'package:biz_link/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../models/product/product.dart';
 import '../../screens/product_screens/product_detail_screen.dart';
 import '../custom_widgets/custom_network_image.dart';
@@ -102,11 +100,9 @@ class GridViewOfProducts extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () =>
-                          Provider.of<CartProvider>(context, listen: false)
-                              .addtocart(posts[index], 1),
+                      onPressed: () {},
                       splashRadius: 12,
-                      icon: const Icon(Icons.add_shopping_cart_rounded),
+                      icon: const Icon(Icons.shopping_cart_checkout_outlined),
                     ),
                   ],
                 ),
