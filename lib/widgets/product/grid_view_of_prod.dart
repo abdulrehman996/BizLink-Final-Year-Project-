@@ -113,14 +113,13 @@ class GridViewOfProducts extends StatelessWidget {
                         )),
                         child: Icon(Icons.edit),
                       ),
-                    if (posts[index].uid != AuthMethods.uid)
-                      IconButton(
-                        onPressed: () =>
-                            Provider.of<CartProvider>(context, listen: false)
-                                .addtocart(posts[index], 1),
-                        splashRadius: 12,
-                        icon: const Icon(Icons.add_shopping_cart_rounded),
-                      ),
+                    IconButton(
+                      onPressed: () =>
+                          Provider.of<CartProvider>(context, listen: false)
+                              .addtocart(posts[index], 1),
+                      splashRadius: 12,
+                      icon: const Icon(Icons.add_shopping_cart_rounded),
+                    ),
                   ],
                 ),
               ],

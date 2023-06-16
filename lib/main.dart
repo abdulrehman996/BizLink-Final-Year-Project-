@@ -4,7 +4,6 @@ import 'package:biz_link/providers/user_provider.dart';
 import 'package:biz_link/screens/chat/personal_chat_page/personal_chat_dashboard.dart';
 import 'package:biz_link/screens/home/main_screen.dart';
 import 'package:biz_link/screens/product_screens/add_product_screen.dart';
-import 'package:biz_link/screens/product_screens/my_product_screen.dart';
 import 'package:biz_link/utility/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +33,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => ProdCatProvider()),
         ChangeNotifierProvider<CartProvider>(
-          create: (BuildContext context) => CartProvider(),
-        ),
+        create: (BuildContext context) => CartProvider(),
+      ),
       ],
       child: Sizer(builder: (
         BuildContext context,
@@ -68,7 +67,6 @@ class MyApp extends StatelessWidget {
 
             // Product
             AddProductScreen.routeName: (_) => const AddProductScreen(),
-            MyProductScreen.routeName: (_) => const MyProductScreen(),
             PersonalChatDashboard.routeName: (_) =>
                 const PersonalChatDashboard(),
           },
