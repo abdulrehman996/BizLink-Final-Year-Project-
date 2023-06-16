@@ -1,4 +1,3 @@
-import 'package:biz_link/enums/role.dart';
 import 'package:flutter/material.dart';
 
 import '../../database/auth_methods.dart';
@@ -30,11 +29,7 @@ class ProductProvider extends ChangeNotifier {
   bool _isLoading = true;
   String _search = '';
 
-  // List<Product> get products => _products;
-  List<Product> products(String value) => _products
-      .where((element) => element.sellTo.contains(value))
-      .cast<Product>()
-      .toList();
+  List<Product> get products => _products;
   bool get isLoading => _isLoading;
 
   onSearch(String value) {
@@ -84,7 +79,7 @@ class ProductProvider extends ChangeNotifier {
         uid: AuthMethods.uid,
         title: AuthMethods.uid,
         prodURL: <ProductURL>[ProductURL(url: '', isVideo: false, index: 0)],
-        sellTo: [Role.retailer.json],
+        thumbnail: '',
         description: 'description',
         categories: <String>[''],
         subCategories: <String>[''],

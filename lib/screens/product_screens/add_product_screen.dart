@@ -1,9 +1,6 @@
 import 'dart:io';
 
 import 'package:biz_link/database/auth_methods.dart';
-import 'package:biz_link/enums/role.dart';
-import 'package:biz_link/models/app_user.dart';
-import 'package:biz_link/providers/user_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -126,9 +123,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       setState(() {
         _isloading = true;
       });
-      final String pid = AuthMethods.uniqueID;
-      final AppUser me = Provider.of<UserProvider>(context, listen: false)
-          .user(uid: AuthMethods.uid);
+      String pid = AuthMethods.uniqueID;
 
       List<ProductURL> urls = <ProductURL>[];
       for (int i = 0; i < 10; i++) {
@@ -151,10 +146,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
         uid: AuthMethods.uid,
         title: _title.text.trim(),
         prodURL: urls,
+        thumbnail: '',
         description: _description.text.trim(),
         categories: <String>[category.selectedCategroy!.catID],
         subCategories: <String>[category.selectedSubCategory!.catID],
-        sellTo: [RoleConvertor().sellTo(me.role).json],
         price: double.parse(_price.text),
         quantity: int.parse(_quantity.text.trim()),
         isAvailable: true,
