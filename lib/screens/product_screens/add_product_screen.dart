@@ -174,7 +174,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   _fetchMedia() async {
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
-      type: FileType.image,
+      type: FileType.media,
     );
     if (result == null) return;
     _files.clear();
