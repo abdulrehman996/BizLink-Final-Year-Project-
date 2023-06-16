@@ -1,7 +1,5 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:biz_link/functions/time_date_function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -60,22 +58,13 @@ class ProductAPI {
 
   Future<String?> uploadImage({required String pid, required File file}) async {
     try {
-      log('Start Uploading image PATH SET...');
-      Reference ref = FirebaseStorage.instance
-          .ref()
-          .child('products')
-          .child(AuthMethods.uid)
-          .child(pid)
-          .child(TimeDateFunctions.timestamp.toString());
-
-      UploadTask uploadTask = ref.putFile(file);
-      log('Start Uploading image SERVER UPLOAD...');
-      TaskSnapshot snap = await uploadTask;
-      String downloadurl = await snap.ref.getDownloadURL();
-      log('Done Uploading URL: $downloadurl');
-      return downloadurl;
+      TaskSnapshot snapshot = await FirebaseStorage.instance
+          .ref(
+              'products/${AuthMethods.uid}/$pid/${DateTime.now().microsecondsSinceEpoch}')
+          .putFile(file);
+      String url = await snapshot.ref.getDownloadURL();
+      return url;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }

@@ -123,8 +123,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       setState(() {
         _isloading = true;
       });
-      String pid = AuthMethods.uniqueID;
-
+      String pid = DateTime.now().microsecondsSinceEpoch.toString();
       List<ProductURL> urls = <ProductURL>[];
       for (int i = 0; i < 10; i++) {
         if (_files[i] != null) {
@@ -142,7 +141,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         }
       }
       Product product = Product(
-        pid: pid,
+        pid: DateTime.now().microsecondsSinceEpoch.toString(),
         uid: AuthMethods.uid,
         title: _title.text.trim(),
         prodURL: urls,

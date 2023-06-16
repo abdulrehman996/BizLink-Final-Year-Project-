@@ -13,7 +13,6 @@ class UserProvider extends ChangeNotifier {
   void init() async {
     if (_user.isNotEmpty) return;
     _user.addAll(await UserAPI().getAllUsers());
-    notifyListeners();
   }
 
   Future<void> refresh() async {

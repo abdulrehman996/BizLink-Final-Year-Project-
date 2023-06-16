@@ -46,10 +46,4 @@ class Utilities {
     }
     return false;
   }
-
-  static int get usernameMaxLenght => 32;
-  static int get bioMaxLength => 160;
-  static int get groupDescriptionMaxLength => 160;
-  static double get videoAspectRatio => 4 / 3;
-  static double get imageAspectRatio => 4 / 3;
 }
