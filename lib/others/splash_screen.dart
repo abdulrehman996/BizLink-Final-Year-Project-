@@ -1,6 +1,4 @@
-import 'package:biz_link/database/auth_methods.dart';
 import 'package:biz_link/screens/auth/login_page.dart';
-import 'package:biz_link/screens/home/main_screen.dart';
 import 'package:biz_link/utility/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(milliseconds: 3000), () {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) =>
-              AuthMethods.uid.isNotEmpty ? MaineScreen() : const LoginPage(),
-        ),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
   }

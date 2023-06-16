@@ -1,4 +1,3 @@
-import 'package:biz_link/enums/role.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AppUser {
@@ -6,7 +5,6 @@ class AppUser {
     required this.uid,
     this.displayName = '',
     this.username = '',
-    this.role = Role.distributor,
     this.countryCode = '',
     this.phoneNumber = '',
     this.email = '',
@@ -22,7 +20,6 @@ class AppUser {
   final String uid;
   final String? displayName;
   final String? username;
-  final Role role;
   final String? imageURL;
   final String? countryCode;
   final String? phoneNumber;
@@ -39,7 +36,6 @@ class AppUser {
       'uid': uid,
       'displayName': displayName ?? '',
       'username': username ?? '',
-      'role': role.json,
       'imageURL': imageURL ?? '',
       'countryCode': countryCode ?? '',
       'phoneNumber': phoneNumber ?? '',
@@ -90,7 +86,6 @@ class AppUser {
       uid: doc.data()!['uid'] ?? '',
       displayName: doc.data()!['displayName'] ?? '',
       username: doc.data()!['username'] ?? '',
-      role: RoleConvertor().toEnum(doc.data()!['role'] ?? Role.distributor),
       imageURL: doc.data()!['imageURL'],
       countryCode: doc.data()!['countryCode'] ?? '',
       phoneNumber: doc.data()!['phoneNumber'] ?? '',

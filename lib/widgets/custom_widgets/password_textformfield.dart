@@ -5,7 +5,6 @@ import '../../utility/custom_validators.dart';
 class PasswordTextFormField extends StatefulWidget {
   const PasswordTextFormField({
     required TextEditingController controller,
-    required this.validator,
     this.textInputAction = TextInputAction.done,
     this.hint = 'Password',
     Key? key,
@@ -14,7 +13,6 @@ class PasswordTextFormField extends StatefulWidget {
   final TextEditingController _controller;
   final TextInputAction? textInputAction;
   final String hint;
-  final String? Function(String? value)? validator;
   @override
   PasswordTextFormFieldState createState() => PasswordTextFormFieldState();
 }
@@ -42,8 +40,7 @@ class PasswordTextFormFieldState extends State<PasswordTextFormField> {
       keyboardType: TextInputType.visiblePassword,
       textInputAction: widget.textInputAction,
       cursorColor: Theme.of(context).colorScheme.secondary,
-      validator: widget.validator ??
-          (String? value) => CustomValidator.password(value),
+      validator: (String? value) => CustomValidator.password(value),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 12),
         hintText: widget.hint,
