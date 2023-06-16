@@ -4,11 +4,29 @@ import 'package:provider/provider.dart';
 
 import '../../providers/cart_provider.dart';
 import '../custom_widgets/custom_elevated_button.dart';
-import 'checkout/check_out_widget.dart';
 
 class CartCheckoutWidget extends StatelessWidget {
   const CartCheckoutWidget({super.key});
-  
+  void _showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Order Confirmation'),
+          content: const Text(
+              'Your order has been sent to the owner. Confirmation of your order will be done in a while.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +67,7 @@ class CartCheckoutWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
                 onTap: () async {
                   await HapticFeedback.heavyImpact();
-                  cartPro.deleteAllItem();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => CheckoutDetails(),));
-                  //_showConfirmationDialog(context);
+                  _showConfirmationDialog(context);
                 },
               ),
             ),
